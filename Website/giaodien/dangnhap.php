@@ -1,14 +1,7 @@
-<?php
-	//session_start();
-	//$bien_bao_mat="co";
-	include "quantri/chucnang/dang_nhap.php";
-	include "quantri/chucnang/ham.php";
-	
-	
-?>
-<link rel="stylesheet" href="css/bootstrap.min.css">
- <script src="js/jquery-3.2.1.min.js"></script>
- <script src="js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
 /* Full-width input fields */
 input[type=text], input[type=password] {
@@ -133,32 +126,33 @@ span.psw {
 
 
 
-<div class="col-xs-11 col-md-11" align="right">
+<div class="col-xs-12 col-md-12" align="right">
 
-<button class="btn" onclick="document.getElementById('id01').style.display='block'" style="width:auto;" style="border-radius:5px">Đăng nhập</button>
+	<button class="btn" onclick="document.getElementById('id01').style.display='block'" style="width:auto;" style="border-radius:5px">Đăng nhập</button>
 
-<div id="id01" class="modal" align="center">
-  <div class="col-xs-8 col-md-8" align="center">
-  <form class="modal-content animate" action="giaodien/dangnhap.php" method="post">
-
-    <div class="container">
-      <label><b>Username</b></label>
-      <input class="form-control" type="text" placeholder="Tài khoản" name="taikhoan" required>
-
-      <label><b>Password</b></label>
-      <input class="form-control" type="password" placeholder="Password" name="pass" required>
+    <div id="id01" class="modal" align="center">
+      <div class="col-xs-12 col-md-12">
+          <form class="modal-content animate" action="do_login.php" method="post" style="height:60%;width:60%">
+            
+                <div class="container" style="width:90%" align="left">
+                  <label><b>Username</b></label>
+                  <input class="form-control" type="text" placeholder="Tài khoản" name="taikhoan" required>
+            
+                  <label><b>Password</b></label>
+                  <input class="form-control" type="password" placeholder="Password" name="pass" required>
+                    
+                  <button class="btn btn-success" type="submit" name="login" value="login">Login</button>
+                  <input type="checkbox" checked="checked"> Remember me
+                </div>
         
-      <button class="btn btn-success" type="submit" name="login">Login</button>
-      <input type="checkbox" checked="checked"> Remember me
+                <div class="container" style="background-color:#f1f1f1;width:90%">
+                  <button  type="button" onclick="document.getElementById('id01').style.display='none'" class="btn cancelbtn">Cancel</button>
+                  <span class="psw">Forgot <a href="#">password?</a></span>
+                </div>
+          </form>
+        </div>
     </div>
-
-    <div class="container" style="background-color:#f1f1f1">
-      <button  type="button" onclick="document.getElementById('id01').style.display='none'" class="btn cancelbtn">Cancel</button>
-      <span class="psw">Forgot <a href="#">password?</a></span>
-    </div>
-  </form>
 </div>
-
 <script>
 // Get the modal
 var modal = document.getElementById('id01');
@@ -172,21 +166,8 @@ window.onclick = function(event) {
 </script>
 
 <?php 
-			if(!isset($xac_dinh_dang_nhap))
-			{
-				//include "trangchu.php";
-			}
-			else 
-			{
-				if($xac_dinh_dang_nhap=="co")
-				{
-					echo "<center>";
-						include("../quantri/index.php");
-					echo "</center>";
-				}
-			}
+			
 		?>
- </div>
-</div>
+
 </body>
 </html>
