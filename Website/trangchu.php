@@ -1,14 +1,11 @@
- <?php
- 	require "config/config.php";
- ?>
  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Quản lý giáo án</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+ <script src="js/jquery-3.2.1.min.js"></script>
+ <script src="js/bootstrap.min.js"></script>
 <style>
 fieldset{width:50%; margin:50px auto;}
 
@@ -18,27 +15,24 @@ fieldset{width:50%; margin:50px auto;}
 
 
 
-<body style="margin:auto 30px auto 30px">
-<div class="row" >
+<body bgcolor="#0e5aa8">
+<?php 
+	include "config/config.php";
+?>
+<div class="container">
+	<div class="row" >
     	<div class="col-xs-12 col-md-12"><img src="images/background/backgroud.png" class="img-rounded" alt="Cinque Terre" width="100%" height="100%" /></div>
     </div>
-<div class="container">
-	
     <div class="row" style="background-color:#FFF; padding-top:10px">
-    	<?php 
-			require "giaodien/dangnhap.php"; 
-		?>
+    	<?php //include "giaodien/dangnhap.php" ?>
     </div>
 	<div class="row" style="background-color:#FFF; padding-bottom:20px" align="center">
-        <div class="col-xs-12 col-md-12"  align="center">
-           <div class="col-xs-12 col-md-12" align="left">
-               <legend style="font-style:italic;"><u>Tìm kiếm tài liệu: </u></legend>
-           </div>
-        </div>
-    </div>
-    <div class="row"  align="center">
-    	<div class="col-xs-2 col-md-2"></div>
-        <div class="col-xs-8 col-md-8" style="background-image:url(images/timkiem/tra_cuu.png); background-repeat:no-repeat" align="right">
+    <div class="col-xs-12 col-md-12"  align="center">
+       <div class="col-xs-8 col-md-8" align="left">
+           <legend style="font-style:italic;"><u>Tìm kiếm tài liệu: </u></legend>
+       </div>
+    <div class="row col-xs-8 col-md-8" style="background-image:url(images/timkiem/tra_cuu.png); background-repeat:no-repeat">
+        <div class="col-xs-12 col-md-12" align="right">
             <form action="trangchu.php" method="post" id='frm1' name="timkiem">
                 <div class="form-group">
                     <div class="row" style="padding-top:150px" align="right">
@@ -61,27 +55,25 @@ fieldset{width:50%; margin:50px auto;}
                      </div> 
                  </div>
                  <div class="form-group">        
-                     <div class="col-sm-offset-2 col-sm-2"  style="padding-bottom:50px; padding-right:5px; padding-top:20px; float:right">
-                         <button type="submit" name="submit" class="btn btn-success" style="font-family:Georgia, 'Times New Roman', Times, serif" value="tim" >Tìm</button>
+                     <div class="col-sm-offset-2 col-sm-4"  style="padding-bottom:50px; padding-right:90px; padding-top:20px">
+                         <button type="submit" name="submit" class="btn btn-success" width="90px" style="font-family:Georgia, 'Times New Roman', Times, serif" value="tim" >Tìm</button>
                      </div>
                  </div>
             </form>
          </div>       	
+		</div>
 	</div>
+	 </div>
      
      <div class="table-responsive">
-      		<?php require "chuc_nang/thong_tin_tim_kiem.php";?>
+      		<?php include "chuc_nang/thong_tin_tim_kiem.php";?>
      </div>
+  </div>
 </div>
 <?php
 //
                                         
 ?>
-<footer class="container-fluid text-center" style="background-color:#99ff99; border-radius:5px">
-  <p>Web Quản lý Tài liệu</p>  
-  <p>Địa chỉ: 180 Cao Lỗ, Phường 4, Quận 8, TP.HCM</p>
-  <p>Liên Hệ: 0987654321</p>
-</footer>
 
 </body>
 </html>

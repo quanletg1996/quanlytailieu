@@ -1,19 +1,10 @@
 <?php
-	function loadClass2($className){
-		require "classes/".$className.".class.php";	
-	}
-	spl_autoload_register("loadClass2");
-	
-	function postIndex2($index, $value="")
-	{
-		if (!isset($_POST[$index]))	return $value;
-		return $_POST[$index];
-	}
+
 	
 	$data=null;
-	$sm=postIndex2("submit");
-	$tk = postIndex2("tu_khoa");
-	$list=postIndex2("list");
+	$sm=postIndex("submit");
+	$tk = postIndex("tu_khoa");
+	$list=postIndex("list");
 	
 	$err = "";
 	
@@ -32,13 +23,13 @@
 ?>
 
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+ <script src="../js/jquery-3.2.1.min.js"></script>
+ <script src="../js/bootstrap.min.js"></script>
 
 
 <body>
-<div class="table-responsive" style="height:300px">
+<div class="table-responsive">
 	<table class="table" width="726" bordercolorlight="#000000" >
        <thead>
     	<tr>
