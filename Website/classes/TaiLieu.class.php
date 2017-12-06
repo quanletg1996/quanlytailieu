@@ -1,18 +1,18 @@
 <?php
 	class TaiLieu extends DB{
-		function getAll(){
+		public function getAll(){
 			return $this->query("select * from tailieu");	
 		}
-		function seach($ten){
+		public function seach($ten){
 			$arr =array("%$ten%");
 			return $this->query("select * from tailieu where tentailieu like ?",$arr);	
 		}
-		function seachMH($ten){
+		public function seachMH($ten){
 			$arr =array("%$ten%");
 			return $this->query("SELECT tailieu.TenTaiLieu, tailieu.LoaiTaiLieu, tailieu.NXB FROM tailieu JOIN
 					monhoc on tailieu.MonHocMaMonHoc=monhoc.MaMonHoc WHERE monhoc.TenMonHoc like ?",$arr);	
 		}
-		function seachGV($ten){
+		public function seachGV($ten){
 			$arr =array("%$ten%");
 			return $this->query("SELECT tailieu.TenTaiLieu, tailieu.LoaiTaiLieu, tailieu.NXB
 					FROM tailieu  JOIN soan on tailieu.MaTaiLieu=soan.TaiLieuMaTaiLieu

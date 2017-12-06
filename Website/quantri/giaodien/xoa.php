@@ -1,17 +1,5 @@
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
-/* Full-width input fields */
-input[type=text], input[type=password] {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-}
 
 /* Set a style for all buttons */
 button {
@@ -22,6 +10,15 @@ button {
     border: none;
     cursor: pointer;
     width: 100%;
+}
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+   
 }
 
 button:hover {
@@ -122,37 +119,9 @@ span.psw {
     }
 }
 </style>
-
-
-
-
-<div class="col-xs-12 col-md-12" align="right">
-
-	<button class="btn" onclick="document.getElementById('id01').style.display='block'" style="width:auto;" style="border-radius:5px">Đăng nhập</button>
-
-    <div id="id01" class="modal" align="center">
-      <div class="col-xs-12 col-md-12">
-          <form class="modal-content animate" action="do_login.php" method="post" style="height:60%;width:60%">
-            
-                <div class="container" style="width:90%" align="left">
-                  <label><b>Username</b></label>
-                  <input class="form-control" type="text" placeholder="Tài khoản" name="taikhoan" required>
-            
-                  <label><b>Password</b></label>
-                  <input class="form-control" type="password" placeholder="Password" name="pass" required>
-                    
-                  <button class="btn btn-success" type="submit" name="login" value="login">Login</button>
-                  <input type="checkbox" checked="checked"> Remember me
-                </div>
-        
-                <div class="container" style="background-color:#f1f1f1;width:90%">
-                  <button  type="button" onclick="document.getElementById('id01').style.display='none'" class="btn cancelbtn">Cancel</button>
-                  <span class="psw">Forgot <a href="#">password?</a></span>
-                </div>
-          </form>
-        </div>
-    </div>
-</div>
+	<?php //$ma=1; //echo $ma?>
+	
+    
 <script>
 // Get the modal
 var modal = document.getElementById('id01');
@@ -165,9 +134,6 @@ window.onclick = function(event) {
 }
 </script>
 
-<?php 
-			
-		?>
 
 </body>
 </html>

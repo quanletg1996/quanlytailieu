@@ -2,7 +2,7 @@
 	class Login extends DB{
 		public $data;
 		
-		function loginAdmin($sql,$ten,$pass,$arr=array()){
+		public function loginAdmin($sql,$ten,$pass,$arr=array()){
 			$stm= $this->conn->prepare($sql);
 			$stm->bindValue(":taikhoan","$ten");
 			$stm->bindValue(":matkhau","$pass");
@@ -11,7 +11,7 @@
 			return $this->data;
 				
 		}
-		function loginGV($ten){
+		public function loginGV($ten){
 			$arr =array("%$ten%");
 			return $this->query("SELECT tailieu.TenTaiLieu, tailieu.LoaiTaiLieu, tailieu.NXB
 					FROM tailieu  JOIN soan on tailieu.MaTaiLieu=soan.TaiLieuMaTaiLieu

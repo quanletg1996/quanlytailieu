@@ -1,6 +1,6 @@
 <?php
 	if(!isset($_SESSION)) session_start();
-	if(!isset($_SESSION["admin"]))
+	if(!isset($_SESSION["giaovien"]))
 	{
 		exit;
 	}
@@ -31,7 +31,6 @@
 <div style="margin-top:10px">
     <ul class="nav nav-tabs">
        <li class="active"><a href="#">Home</a></li>
-       <li><a href="#">Thêm</a></li>
        <li style="float:right"><a href="logout.php">Thoát</a></li>
     </ul>
 </div>
@@ -87,9 +86,7 @@
 <!--end tim kiem -->
 
 <!--hiển thị -->
-    <?php include "chucnang/do_tim_kiem.php";
-		//print_r($_POST);
-	?>
+    <?php include "chucnang/do_tim_kiem.php";?>
 <!--end hiển thị -->
 </div>
 <!--footer-->

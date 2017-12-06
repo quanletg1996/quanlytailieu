@@ -8,14 +8,5 @@
 	
 	//define("BASE_URL","http://quanlygiaoan.tk/");
 	
-	function loadClass($className){
-		include "classes/".$className.".class.php";	
-	}
-	spl_autoload_register("loadClass");
 	
-	function postIndex($index, $value="")
-	{
-		if (!isset($_POST[$index]))	return $value;
-		return $_POST[$index];
-	}
 ?>
