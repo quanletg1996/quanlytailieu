@@ -24,14 +24,35 @@
 			$data=$this->query("SELECT * FROM tailieu where tailieu.MaTaiLieu=?", $arr);
 			return $data;	
 		}
+		public function getAllGiaovien(){
+			$data=$this->query("SELECT * FROM giaovien");
+			return $data;	
+		}
 		public function getTailieu($ma){
 			$arr=array("%$ma%");
 			$data=$this->query("SELECT * FROM tailieu where tailieu.TenTaiLieu like ?", $arr);
 			return $data;	
 		}
 		public function getGiaovien($ma){
+			$data=null;
 			$arr=array("%$ma%");
 			$data=$this->query("SELECT * FROM giaovien where giaovien.TenGiaoVien like ?", $arr);
-			return $data;	
+			if($data !=null){return $data;}
+			else{return false;}	
+		}
+		public function updateTailieu($ma){
+			$data=null;
+			$arr=array("$ma");
+			$data=$this->query("UPDATE tailieu SET ThongTin='Cập nhật' WHERE MaTaiLieu=?", $arr);
+			if($data !=null){return $true;}
+			else{return false;}
+		}
+		public function updateCapnhat($matl,$magv,$ngaycn,$noidung,$phucap,$vaitro,$kiemduyet){
+			$data=null;
+			$arr= array("$matl","$magv","$ngaycn","$noidung","$phucap","$vaitro","$kiemduyet");
+			$data=$this->query("INSERT INTO capnhat (TaiLieuMaTaiLieu , GiaoVienMaGiaoVien , NgayCapNhat ,TomTatND ,PhuCap ,VaiTro ,NguoiKiemDuyet)
+									VALUES (?,?,?,?,?,?,?)", $arr);
+			if($data !=null){return $true;}
+			else{return false;}
 		}
 	}

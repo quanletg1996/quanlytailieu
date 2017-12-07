@@ -33,7 +33,7 @@
 	}
 
 	//print_r($data);
-	echo "<hr>";
+	//echo "<hr>";
 ?>
 
 <body>

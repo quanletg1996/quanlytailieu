@@ -9,13 +9,52 @@
 		require "../classes/".$className.".class.php";	
 	}
 	spl_autoload_register("loadClass");
-	
+	function thong_bao_abc($c)
+	{
+		?>
+			<html><head>
+			  <meta charset="UTF-8">
+			  <title>Thông báo</title></head>
+			<body>
+				<br><br><br><br>
+				<script type="text/javascript">
+					alert("<?php echo $c; ?>");
+					history.back();
+					history.back();
+					history.back();
+				</script>
+			</body>
+			</html>		
+		<?php 
+		exit();
+	}
+	$matl=$_GET["matl"];
 	$tentl=$_POST["tentl"];
 	$tengv=$_POST["tengv"];
 	$TL=new TaiLieu();
+	
 	$tailieu=$TL->getTailieu($tentl);
-	print_r($tailieu);echo "<br>";
+	//print_r($tailieu);echo "<br>";
+	
 	$giaovien=$TL->getGiaovien($tengv);
-	print_r($giaovien);echo "<br>";
-	print_r($_POST);echo "<br>";
+	$magv=$giaovien[0]["MaGiaoVien"];
+	if($giaovien==false){thong_bao_abc("Không có giáo viên này!!");}
+	//print_r($giaovien);echo "<br>";
+	else{
+		//print_r($_POST);echo "<br>";
+		$ngaycn=$_POST["ngaycn"];
+		$noidung=$_POST["noidung"];
+		
+		$phucap;
+		if($_POST["phucap"]==1){$phucap=true;}
+		else {$phucap=false;}
+		
+		$vaitro=$_POST["vaitro"];
+		$kiemduyet=$_POST["kiemduyet"];
+		
+		$data=$TL->updateTailieu($matl);
+		
+		$data2=$TL->updateCapnhat($matl,$magv,$ngaycn,$noidung,$phucap,$vaitro,$kiemduyet);
+		thong_bao_abc("Sửa thành công!!");
+	}
 ?>

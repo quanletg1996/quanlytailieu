@@ -26,6 +26,7 @@
 				<script type="text/javascript">
 					alert("<?php echo $c; ?>");
 					history.back();
+					history.back();
 				</script>
 			</body>
 			</html>		
@@ -38,7 +39,7 @@
 	$TL=new TaiLieu();
 	$data=$TL->delete($ma);
 	if($data==true){
-		header("location:../../quantri");	
+		thong_bao_abc("Đã xoá tài liệu!!");
 	}
 	else{
 		thong_bao_abc("Chưa xoá được tài liệu!!");

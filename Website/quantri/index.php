@@ -31,7 +31,7 @@
 <div style="margin-top:10px">
     <ul class="nav nav-tabs">
        <li class="active"><a href="#">Home</a></li>
-       <li><a href="#">Thêm</a></li>
+       <li><a href="giaodien/them.php">Thêm</a></li>
        <li style="float:right"><a href="logout.php">Thoát</a></li>
     </ul>
 </div>

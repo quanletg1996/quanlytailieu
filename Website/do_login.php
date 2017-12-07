@@ -1,7 +1,7 @@
  <?php
  	require "config/config.php";
 	if(!isset($_SESSION)) session_start();
-    print_r($_POST);
+    //print_r($_POST);
 	//exit;
 	if(!isset($_POST["login"])){
 		exit;

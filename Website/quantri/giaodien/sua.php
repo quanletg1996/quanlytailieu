@@ -9,10 +9,14 @@
 		require "../classes/".$className.".class.php";	
 	}
 	spl_autoload_register("loadClass");
-	
+	if(!isset($_POST["btnSua"])){?> <script type="text/javascript">
+										alert("<?php echo "Quay lại trang admin!!"; ?>");
+										history.back();
+									</script> <?php exit;};
 	$ma=$_POST["btnSua"];
 	$TL=new TaiLieu();
 	$data=$TL->getValueSua($ma);
+	$dataGV=$TL->getAllGiaovien();
 	
 	$tentl=$data[0]["TenTaiLieu"];
 
@@ -25,6 +29,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../js/style.css">
+  <script src="../js/choosen.js"></script>
 <style>
  
 </style>
@@ -47,14 +53,22 @@
      
 <!--Khung sua --> 
 <div class="container">
-    <form style="margin:10px auto;width:50%" name="form" action="../chucnang/sua.php" method="post">
+    <form style="margin:10px auto;width:50%" name="form" action="../chucnang/sua.php?matl=<?php echo $ma?>" method="post">
       <div class="form-group">
         <label for="inputsm" style="padding-left:15px">Tên tài liệu:</label>
         <input class="form-control input-sm" value="<?php echo $tentl ?>" id="tentl" name="tentl" type="text">
       </div>
        <div class="form-group">
         <label for="inputdefault" style="padding-left:15px">Tên giáo viên cập nhật</label>
-        <input class="form-control" id="tengv" name="tengv" type="text" required>
+        <select class="chosen" style="width:500px;" name="tengv" required>
+        	<option></option>
+          <?php foreach($dataGV as $v){
+					$tengv=$v['TenGiaoVien'];
+					?>
+             <option value="<?php echo $tengv ?>"><?php echo $tengv ?></option>       
+          <?php } ?>
+        </select>
+
       </div>
       <div class="form-group">
         <label for="inputlg" style="padding-left:15px">Ngày cập nhật</label>
@@ -62,18 +76,18 @@
       </div>
       <div class="form-group">
         <label for="inputlg" style="padding-left:15px">Tóm tắt nội dung sửa</label>
-        <textarea class="form-control" rows="5" id="comment" name="noidung" id="noidung" required></textarea>
+        <textarea class="form-control" rows="5" id="comment" name="noidung" id="noidung" required>Tóm tắt nội dung sửa: </textarea>
       </div>
       <div class="form-group">
         <label for="inputlg" style="padding-left:15px">Phụ cấp</label><br />
-        <input id="phucap"  name="phucap" type="radio" required>Đã nhận
-        <input id="phucap" name="phucap" type="radio" >Chưa nhận<br />
+        <input id="phucap"  name="phucap" type="radio" value="1" required>Đã nhận
+        <input id="phucap" name="phucap" type="radio" value="0" >Chưa nhận<br />
       </div>
       <div class="form-group">
         <label for="inputlg" style="padding-left:15px">Vai trò</label>
         <select name="vaitro" id="vaitro" >
-        	<option value="soanchinh">Soạn chính</option>
-            <option value="soanphu" >Soạn phụ</option>
+        	<option value="Soạn chính">Soạn chính</option>
+            <option value="Soạn phụ" >Soạn phụ</option>
         </select>
       </div>
       <div class="form-group">
@@ -95,5 +109,8 @@
       <p>Địa chỉ: 180 Cao Lỗ, Phường 4, Quận 8, TP.HCM</p>
       <p>Liên Hệ: 0987654321</p>
     </footer>
+<script type="text/javascript">
+$(".chosen").chosen();
+</script>
 </body>
 </html>
