@@ -141,13 +141,11 @@ span.psw {
                   <label><b>Password</b></label>
                   <input class="form-control" type="password" placeholder="Password" name="pass" required>
                     
-                  <button class="btn btn-success" type="submit" name="login" value="login">Login</button>
-                  <input type="checkbox" checked="checked"> Remember me
+                  <button class="btn btn-success" type="submit" name="login" value="login" style="width:10%">Login</button>
                 </div>
         
                 <div class="container" style="background-color:#f1f1f1;width:90%">
-                  <button  type="button" onclick="document.getElementById('id01').style.display='none'" class="btn cancelbtn">Cancel</button>
-                  <span class="psw">Forgot <a href="#">password?</a></span>
+                  <button  type="button" onclick="document.getElementById('id01').style.display='none'" class="btn cancelbtn" style="float:right">Cancel</button>
                 </div>
           </form>
         </div>

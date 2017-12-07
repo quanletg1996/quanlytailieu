@@ -1,3 +1,19 @@
+<?php
+	if(!isset($_SESSION)) session_start();
+	if(!isset($_SESSION["admin"]))
+	{
+		exit;
+	}
+	require "../../config/config.php";
+	function loadClass($className){
+		require "../classes/".$className.".class.php";	
+	}
+	spl_autoload_register("loadClass");
+	
+	$TL=new TaiLieu();
+	$dataMH=$TL->getAllMonhoc();
+	$dataGV=$TL->getAllGiaovien();
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -6,6 +22,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../js/style.css">
+  <script src="../js/choosen.js"></script>
 <style>
  
 </style>
@@ -18,7 +36,7 @@
     
 <div style="margin-top:10px">
     <ul class="nav nav-tabs">
-       <li><a href="#">Home</a></li>
+       <li><a href="../index.php">Home</a></li>
        <li class="active"><a href="#">Thêm</a></li>
        <li style="float:right"><a href="../logout.php">Thoát</a></li>
     </ul>
@@ -28,17 +46,16 @@
      
 <!--Khung sua --> 
 <div class="container">
-    <form style="margin:10px auto;width:50%" name="form" action="../chucnang/themTL.php" method="post">
+    <form style="margin:10px auto;width:50%" name="form" action="../chucnang/them.php" method="post">
       <div class="form-group">
         <label for="inputlg" style="padding-left:15px">Loại tài liệu:</label>
         <select name="loaitl" id="loaitl" >
-        	<option value="soanchinh">Bài giảng</option>
-            <option value="soanphu" >Giáo trình</option>
+        	<option value="Bài giảng">Bài giảng</option>
         </select>
       </div>
       <div class="form-group">
-        <label for="inputsm" style="padding-left:15px">Tài liệu:</label>
-        <input class="form-control input-sm" placeholder="nhập tên tài liệu..." id="tentl" name="tentl" type="text">
+        <label for="inputsm" style="padding-left:15px">Tên tài liệu:</label>
+        <input class="form-control input-sm" placeholder="nhập tên tài liệu..." id="tentl" name="tentl" type="text" required>
       </div>
        <div class="form-group">
         <label for="inputdefault" style="padding-left:15px">Mã tài liệu:</label>
@@ -46,19 +63,65 @@
       </div>
       <div class="form-group">
         <label for="inputdefault" style="padding-left:15px">Môn học:</label>
-        <input class="form-control" placeholder="nhập tên môn học..." id="tenmh" name="tenmh" type="text" required>
+        <select class="chosen" style="width:500px;" name="mamh" required>
+        	<option value="0">"Môn hoc..."</option>
+          <?php foreach($dataMH as $v){
+					$tenmh=$v['TenMonHoc'];
+					$mamh=$v['MaMonHoc'];
+					?>
+             <option value="<?php echo $mamh ?>"><?php echo $tenmh ?></option>       
+          <?php } ?>
+        </select>
       </div>
       <div class="form-group">
-        <label for="inputlg" style="padding-left:15px">Ngày cập nhật:</label>
+           <div style="width:49%;float:left">
+            	<label for="inputlg" style="padding-left:15px">Ngày bắt đầu:</label>
+           </div>
+           <div style="width:49%;float:left">
+            	<label for="inputlg" style="padding-left:15px">Ngày hoàn thành:</label>
+           </div>
+            <div style="width:49%;float:left">
+            	<input class="form-control input-lg" id="ngaybd" name="ngaybd"  type="date" required>
+            </div>
+            <div style="width:49%;float:left">
+            	<input class="form-control input-lg" id="ngayht" name="ngayht"  type="date" required>
+            </div>
+            <div style="clear:both"></div>
+      </div>
+      <!--<div class="form-group">
+        <label for="inputlg" style="padding-left:15px">Ngày dự kiến</label>
         <input class="form-control input-lg" id="ngaycn" name="ngaycn"  type="date" required>
+      </div>-->
+      <div class="form-group">
+        
+      </div>
+      <div style="margin-left:50px">
+       <label for="inputlg" style="padding-left:15px">Tiến độ</label>
+       <select name="tiendo" id="tiendo" >
+       		<option value="0%">0%</option>
+        	<option value="25%">25%</option>
+            <option value="50%" >50%</option>
+            <option value="75%" >75%</option>
+            <option value="100%" >100%</option>
+        </select>
       </div>
       <div class="form-group">
         <label for="inputdefault" style="padding-left:15px">Giáo viên:</label>
-        <input class="form-control" placeholder="nhập tên giáo viên soạn..." id="tengv" name="tengv" type="text" required><br/>
+        <select class="chosen" style="width:500px;" name="magv" required>
+        	<option value="0">"Giáo viên..."</option>
+          <?php foreach($dataGV as $v){
+					$tengv=$v['TenGiaoVien'];
+					$magv=$v['MaGiaoVien'];
+					?>
+             <option value="<?php echo $magv ?>"><?php echo $tengv ?></option>       
+          <?php } ?>
+        </select>
+       </div>
+       <div class="form-group"> 
         <label for="inputlg" style="padding-left:15px">Vai trò</label>
         <select name="vaitro" id="vaitro" >
-        	<option value="soanchinh">Soạn chính</option>
-            <option value="soanphu" >Soạn phụ</option>
+        	<option value="Soạn chính">Soạn chính</option>
+            <option value="Soạn phụ" >Soạn phụ</option>
         </select>
       </div>
       <div class="form-group">
@@ -67,8 +130,8 @@
       </div>
        <div class="form-group">
         <label for="inputlg" style="padding-left:15px">Phụ cấp</label><br />
-        <input id="phucap"  name="phucap" type="radio" required>Đã nhận
-        <input id="phucap" name="phucap" type="radio" >Chưa nhận<br />
+        <input id="phucap"  name="phucap" type="radio" value="1" required>Đã nhận
+        <input id="phucap" name="phucap" type="radio" value="0">Chưa nhận<br />
       </div>
        <div class="form-group" style="float:right">
         <input class="btn btn-success" id="btnThem" name="btnThem" value="Thêm" type="submit">
@@ -85,5 +148,8 @@
       <p>Địa chỉ: 180 Cao Lỗ, Phường 4, Quận 8, TP.HCM</p>
       <p>Liên Hệ: 0987654321</p>
     </footer>
+<script type="text/javascript">
+$(".chosen").chosen();
+</script>
 </body>
 </html>

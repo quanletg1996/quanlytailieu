@@ -9,10 +9,6 @@
 		require "../classes/".$className.".class.php";	
 	}
 	spl_autoload_register("loadClass");
-	if(!isset($_POST["btnSua"])){?> <script type="text/javascript">
-										alert("<?php echo "Quay lại trang admin!!"; ?>");
-										history.back();
-									</script> <?php exit;};
 	$ma=$_POST["btnSua"];
 	$TL=new TaiLieu();
 	$data=$TL->getValueSua($ma);
@@ -61,11 +57,12 @@
        <div class="form-group">
         <label for="inputdefault" style="padding-left:15px">Tên giáo viên cập nhật</label>
         <select class="chosen" style="width:500px;" name="tengv" required>
-        	<option></option>
+        	<option>"Giáo viên..."</option>
           <?php foreach($dataGV as $v){
 					$tengv=$v['TenGiaoVien'];
+					$magv=$v['MaGiaoVien'];
 					?>
-             <option value="<?php echo $tengv ?>"><?php echo $tengv ?></option>       
+             <option value="<?php echo $magv ?>"><?php echo $tengv ?></option>       
           <?php } ?>
         </select>
 

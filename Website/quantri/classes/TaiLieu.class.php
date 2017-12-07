@@ -28,6 +28,10 @@
 			$data=$this->query("SELECT * FROM giaovien");
 			return $data;	
 		}
+		public function getAllMonhoc(){
+			$data=$this->query("SELECT * FROM monhoc");
+			return $data;	
+		}
 		public function getTailieu($ma){
 			$arr=array("%$ma%");
 			$data=$this->query("SELECT * FROM tailieu where tailieu.TenTaiLieu like ?", $arr);
@@ -52,6 +56,22 @@
 			$arr= array("$matl","$magv","$ngaycn","$noidung","$phucap","$vaitro","$kiemduyet");
 			$data=$this->query("INSERT INTO capnhat (TaiLieuMaTaiLieu , GiaoVienMaGiaoVien , NgayCapNhat ,TomTatND ,PhuCap ,VaiTro ,NguoiKiemDuyet)
 									VALUES (?,?,?,?,?,?,?)", $arr);
+			if($data !=null){return $true;}
+			else{return false;}
+		}
+		public function insertTailieu($matl,$mamh,$tentl,$thongtin,$loaitl,$nxb){
+			$data=null;
+			$arr=array("$matl","$mamh","$tentl","$thongtin","$loaitl","$nxb");
+			$data=$this->query("INSERT INTO tailieu (MaTaiLieu , MonHocMaMonHoc  , TenTaiLieu  ,ThongTin  ,LoaiTaiLieu  ,NXB)
+									VALUES (?,?,?,?,?,?)", $arr);
+			if($data !=null){return $true;}
+			else{return false;}
+		}
+		public function insertSoan($matl,$magv,$tiendo,$ngaybd,$ngayht,$vaitro,$phucap,$kiemduyet){
+			$data=null;
+			$arr= array("$matl","$magv","$tiendo","$ngaybd","$ngayht","$vaitro","$phucap","$kiemduyet");
+			$data=$this->query("INSERT INTO soan (TaiLieuMaTaiLieu , GiaoVienMaGiaoVien , TienDo ,NgayBD ,NgayHT ,VaiTro ,PhuCap,NguoiKiemDuyet)
+									VALUES (?,?,?,?,?,?,?,?)", $arr);
 			if($data !=null){return $true;}
 			else{return false;}
 		}
