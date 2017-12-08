@@ -2,7 +2,7 @@
 	class DB{
 		public $conn;
 		public $data;
-
+		public $numRow;
 		public function __construct(){
 			$dsn="mysql:host=".HOST.";dbname=".DB_NAME;
 			try{

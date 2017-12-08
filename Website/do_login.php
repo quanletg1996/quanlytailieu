@@ -1,8 +1,9 @@
  <?php
+ 	if(!isset($_SESSION)) session_start();
  	error_reporting(E_ALL);
     ini_set('display_errors', 1);
  	require "config/config.php";
-	if(!isset($_SESSION)) session_start();
+	
     //print_r($_POST);
 	//exit;
 	if(!isset($_POST["login"])){
@@ -60,7 +61,7 @@
 			{
 				$_SESSION["admin"]=1;
 				?>
-					<script> window.location="http://quanlygiaoan.tk/giaovien/index.php";</script>
+					<script> window.location="quantri";</script>
 				<?php 
 				exit;
 			}
@@ -68,7 +69,7 @@
 			{
 				$_SESSION["giaovien"]=1;
 				?>
-					<script> window.location="http://quanlygiaoan.tk/giaovien/index.php";</script>
+					<script> window.location="giaovien";</script>
 				<?php 
 				exit;
 			}

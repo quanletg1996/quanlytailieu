@@ -40,7 +40,6 @@
         	<th width="300">Tên tài liệu</th>
             <th width="96">Loại tài liệu</th>
             <th width="228">Nhà xuất bản</th>
-            <th width="60">Sửa</th>
             <th width="60">Download</th>
         </tr>
        </thead>
@@ -51,13 +50,13 @@
 					$ten=$v['TenTaiLieu'];
 					$loai=$v['LoaiTaiLieu'];
 					$nxb= $v['NXB'] ;
+					$file=$v['file'];
 					?>
 					<tr>
 						<td> <?php echo "$ten" ?></td>
 						<td><?php echo "$loai" ?></td>
 						<td><?php echo "$nxb" ?></td>
-                        <td><a href="#">Sửa</a></td>
-                        <td><a href="#">Download</a></td>
+                        <td><a href="<?php echo "../file/$file" ?>">Download</a></td>
 					</tr>
 					<?php
 				   // print_r($v);

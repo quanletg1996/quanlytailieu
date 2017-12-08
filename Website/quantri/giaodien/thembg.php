@@ -52,7 +52,7 @@
      
 <!--Khung sua --> 
 <div class="container">
-    <form style="margin:10px auto;width:50%" name="form" action="../chucnang/them.php" method="post">
+    <form style="margin:10px auto;width:50%" name="form" action="../chucnang/them.php" method="post" enctype="multipart/form-data">
       <div class="form-group">
         <label for="inputlg" style="padding-left:15px">Loại tài liệu:</label>
         <select name="loaitl" id="loaitl" >
@@ -78,6 +78,10 @@
              <option value="<?php echo $mamh ?>"><?php echo $tenmh ?></option>       
           <?php } ?>
         </select>
+      </div>
+      <div class="form-group">
+        <label for="inputdefault" style="padding-left:15px">File tài liệu:</label>
+        <input id="file" name="file" type="file" required>
       </div>
       <div class="form-group">
            <div style="width:49%;float:left">

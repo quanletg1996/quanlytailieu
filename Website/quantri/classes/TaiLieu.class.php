@@ -32,15 +32,17 @@
 			$data=$this->query("SELECT * FROM monhoc");
 			return $data;	
 		}
-		public function getTailieu($ma){
-			$arr=array("%$ma%");
+		public function getTailieu($ten){
+			$arr=array("%$ten%");
 			$data=$this->query("SELECT * FROM tailieu where tailieu.TenTaiLieu like ?", $arr);
-			return $data;	
+			$n=$this->numRow;
+			if($n !=0){return $data;}
+			else{return false;}	
 		}
 		public function getGiaovien($ma){
 			$data=null;
-			$arr=array("%$ma%");
-			$data=$this->query("SELECT * FROM giaovien where giaovien.TenGiaoVien like ?", $arr);
+			$arr=array("$ma");
+			$data=$this->query("SELECT * FROM giaovien where giaovien.MaGiaoVien = ?", $arr);
 			if($data !=null){return $data;}
 			else{return false;}	
 		}
@@ -48,7 +50,7 @@
 			$data=null;
 			$arr=array("$ma");
 			$data=$this->query("UPDATE tailieu SET ThongTin='Cập nhật' WHERE MaTaiLieu=?", $arr);
-			if($data !=null){return $true;}
+			if($data !=null){return $data;}
 			else{return false;}
 		}
 		public function updateCapnhat($matl,$magv,$ngaycn,$noidung,$phucap,$vaitro,$kiemduyet){
@@ -56,23 +58,49 @@
 			$arr= array("$matl","$magv","$ngaycn","$noidung","$phucap","$vaitro","$kiemduyet");
 			$data=$this->query("INSERT INTO capnhat (TaiLieuMaTaiLieu , GiaoVienMaGiaoVien , NgayCapNhat ,TomTatND ,PhuCap ,VaiTro ,NguoiKiemDuyet)
 									VALUES (?,?,?,?,?,?,?)", $arr);
-			if($data !=null){return $true;}
+			if($data !=null){return $data;}
 			else{return false;}
 		}
-		public function insertTailieu($matl,$mamh,$tentl,$thongtin,$loaitl,$nxb){
+		public function insertTailieu($matl,$mamh,$tentl,$thongtin,$loaitl,$nxb,$file){
 			$data=null;
-			$arr=array("$matl","$mamh","$tentl","$thongtin","$loaitl","$nxb");
-			$data=$this->query("INSERT INTO tailieu (MaTaiLieu , MonHocMaMonHoc  , TenTaiLieu  ,ThongTin  ,LoaiTaiLieu  ,NXB)
-									VALUES (?,?,?,?,?,?)", $arr);
-			if($data !=null){return $true;}
-			else{return false;}
+			$arr=array("$matl","$mamh","$tentl","$thongtin","$loaitl","$nxb","$file");
+			$data=$this->query("INSERT INTO tailieu (MaTaiLieu , MonHocMaMonHoc  , TenTaiLieu  ,ThongTin  ,LoaiTaiLieu  ,NXB ,file)
+									VALUES (?,?,?,?,?,?,?)", $arr);
+			return true;
 		}
 		public function insertSoan($matl,$magv,$tiendo,$ngaybd,$ngayht,$vaitro,$phucap,$kiemduyet){
 			$data=null;
 			$arr= array("$matl","$magv","$tiendo","$ngaybd","$ngayht","$vaitro","$phucap","$kiemduyet");
 			$data=$this->query("INSERT INTO soan (TaiLieuMaTaiLieu , GiaoVienMaGiaoVien , TienDo ,NgayBD ,NgayHT ,VaiTro ,PhuCap,NguoiKiemDuyet)
 									VALUES (?,?,?,?,?,?,?,?)", $arr);
-			if($data !=null){return $true;}
-			else{return false;}
+			return true;
+		}
+		public function upload($file,$path,$maxsize=1,$extention = array('docx','doc','pptx','ppsx'))
+		{
+			$size = $maxsize * 1024*1024; 
+			//kiem tra dữ liệu post lên trong $_FILES ($file)
+			if($file && $file['error']==0 && !empty($file['name']))
+			{
+				//check size
+				if($file['size']>0 && $file['size']<=$size)
+				{
+					//dat lai ten va check đuôi file
+					$arrayname = explode('.',$file['name']);
+					$ext = $arrayname[count($arrayname)-1];
+					if(in_array($ext,$extention))
+					{
+						$newname = 'file'.time().'.'.$ext;
+						$fullpath = $newname;
+						if(move_uploaded_file($file['tmp_name'],$fullpath))
+						{
+							return $fullpath;
+						}
+						return false; 						
+					}
+					return false; 		
+				}
+				return false; 		
+			}
+			return false; 
 		}
 	}

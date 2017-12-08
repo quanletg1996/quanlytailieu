@@ -30,16 +30,16 @@
 	}
 	$matl=$_GET["matl"];
 	$tentl=$_POST["tentl"];
-	$tengv=$_POST["tengv"];
+	$magv=$_POST["magv"];
 	$TL=new TaiLieu();
 	
 	$tailieu=$TL->getTailieu($tentl);
-	//print_r($tailieu);echo "<br>";
+	print_r($tailieu);echo "<br>";
 	
-	$giaovien=$TL->getGiaovien($tengv);
+	$giaovien=$TL->getGiaovien($magv);
 	$magv=$giaovien[0]["MaGiaoVien"];
+	print_r($giaovien);echo "<br>";
 	if($giaovien==false){thong_bao_abc("Không có giáo viên này!!");}
-	//print_r($giaovien);echo "<br>";
 	else{
 		//print_r($_POST);echo "<br>";
 		$ngaycn=$_POST["ngaycn"];

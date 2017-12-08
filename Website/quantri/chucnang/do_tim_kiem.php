@@ -93,8 +93,8 @@ function getMa()
 						<td><?php echo "$loai" ?></td>
 						<td><?php echo "$nxb" ?></td>
                         <td>
-                        	<form action="giaodien/sua.php" method="post">
-                            	<button type="submit" name="btnSua" class="btn" value="<?php echo $ma ?>" style="width:auto;" style="border-radius:5px">
+                        	<form action="giaodien/sua.php?ma=<?php echo $ma ?>" method="post">
+                            	<button type="submit" name="btnSua" class="btn" style="width:auto;" style="border-radius:5px">
                                 Sửa</button>
                         	</form>
                         </td>

@@ -9,7 +9,7 @@
 		require "../classes/".$className.".class.php";	
 	}
 	spl_autoload_register("loadClass");
-	$ma=$_POST["btnSua"];
+	$ma=$_GET["ma"];
 	$TL=new TaiLieu();
 	$data=$TL->getValueSua($ma);
 	$dataGV=$TL->getAllGiaovien();
@@ -39,8 +39,15 @@
     
 <div style="margin-top:10px">
     <ul class="nav nav-tabs">
-       <li class="active"><a href="#">Home</a></li>
-       <li><a href="#">Thêm</a></li>
+       <li ><a href="../index.php">Home</a></li>
+       <li class="dropdown">
+         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Thêm
+         <span class="caret"></span></a>
+         <ul class="dropdown-menu">
+           <li><a href="thembg.php">Thêm bài giảng</a></li>
+           <li><a href="themgt.php">Thêm giáo trình</a></li>
+         </ul>
+       </li>
        <li style="float:right"><a href="../logout.php">Thoát</a></li>
     </ul>
 </div>
@@ -56,7 +63,7 @@
       </div>
        <div class="form-group">
         <label for="inputdefault" style="padding-left:15px">Tên giáo viên cập nhật</label>
-        <select class="chosen" style="width:500px;" name="tengv" required>
+        <select class="chosen" style="width:500px;" name="magv" required>
         	<option>"Giáo viên..."</option>
           <?php foreach($dataGV as $v){
 					$tengv=$v['TenGiaoVien'];
