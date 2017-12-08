@@ -31,7 +31,14 @@
 <div style="margin-top:10px">
     <ul class="nav nav-tabs">
        <li class="active"><a href="#">Home</a></li>
-       <li><a href="giaodien/them.php">Thêm</a></li>
+       <li class="dropdown">
+         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Thêm
+         <span class="caret"></span></a>
+         <ul class="dropdown-menu">
+           <li><a href="giaodien/thembg.php">Thêm bài giảng</a></li>
+           <li><a href="giaodien/themgt.php">Thêm giáo trình</a></li>
+         </ul>
+       </li>
        <li style="float:right"><a href="logout.php">Thoát</a></li>
     </ul>
 </div>

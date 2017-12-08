@@ -43,6 +43,9 @@
 	$kiemduyet=$_POST["kiemduyet"];
 	$thongtin="Viết mới";
 	$nxb="Không có";
+	if(isset($_POST["nxb"])){
+		$nxb=$_POST["nxb"];
+	}
 	$phucap;
 		if($_POST["phucap"]==1){$phucap=true;}
 		else {$phucap=false;}
@@ -53,6 +56,7 @@
 			if ($ngayht > $ngaybd) {
 				$dataTL=$TL->insertTailieu($matl,$mamh,$tentl,$thongtin,$loaitl,$nxb);
 				$dataSoan=$TL->insertSoan($matl,$magv,$tiendo,$ngaybd,$ngayht,$vaitro,$phucap,$kiemduyet);
+				thong_bao_abc("Thêm thành công");
 			} else {thong_bao_abc("Ngày 'Bắt đầu' phải trước ngày 'Hoàn thành'");}
 		}else {thong_bao_abc("Tiến độ quá thấp..");}
 	 }else {thong_bao_abc("Chưa chọn giáo viên..");}

@@ -1,4 +1,6 @@
  <?php
+ 	error_reporting(E_ALL);
+    ini_set('display_errors', 1);
  	require "config/config.php";
 	if(!isset($_SESSION)) session_start();
     //print_r($_POST);
@@ -52,17 +54,23 @@
 		$dangnhap=new Login();
 		$data=$dangnhap->loginAdmin("Select * from dangnhap where taikhoan = :taikhoan and matkhau = :matkhau",$tk,$pass);
 		
-		print_r($data);
+		//print_r($data);
 		if($data!=null){
 		if($data[0]["loai"]=="ad")
 			{
 				$_SESSION["admin"]=1;
-				header("location:quantri");
+				?>
+					<script> window.location="http://quanlygiaoan.tk/giaovien/index.php";</script>
+				<?php 
+				exit;
 			}
 		else if($data[0]["loai"]=="gv")
 			{
 				$_SESSION["giaovien"]=1;
-				header("location:giaovien");
+				?>
+					<script> window.location="http://quanlygiaoan.tk/giaovien/index.php";</script>
+				<?php 
+				exit;
 			}
 		}
 		else {
