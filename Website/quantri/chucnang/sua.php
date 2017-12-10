@@ -28,33 +28,34 @@
 		<?php 
 		exit();
 	}
+	$TL=new TaiLieu();
+	
+	$file=$TL->upload($_FILES['file'],'../../file/',10);
 	$matl=$_GET["matl"];
 	$tentl=$_POST["tentl"];
 	$magv=$_POST["magv"];
-	$TL=new TaiLieu();
+	print_r($_POST);
 	
 	$tailieu=$TL->getTailieu($tentl);
 	print_r($tailieu);echo "<br>";
 	
-	$giaovien=$TL->getGiaovien($magv);
-	$magv=$giaovien[0]["MaGiaoVien"];
-	print_r($giaovien);echo "<br>";
-	if($giaovien==false){thong_bao_abc("Không có giáo viên này!!");}
-	else{
-		//print_r($_POST);echo "<br>";
-		$ngaycn=$_POST["ngaycn"];
-		$noidung=$_POST["noidung"];
+	$ngaycn=$_POST["ngaycn"];
+	$noidung=$_POST["noidung"];
 		
-		$phucap;
-		if($_POST["phucap"]==1){$phucap=true;}
-		else {$phucap=false;}
+	$phucap=$_POST["phucap"];
 		
-		$vaitro=$_POST["vaitro"];
-		$kiemduyet=$_POST["kiemduyet"];
+	$vaitro=$_POST["vaitro"];
+	$kiemduyet=$_POST["kiemduyet"];
 		
-		$data=$TL->updateTailieu($matl);
-		
-		$data2=$TL->updateCapnhat($matl,$magv,$ngaycn,$noidung,$phucap,$vaitro,$kiemduyet);
-		thong_bao_abc("Sửa thành công!!");
+	if($data=$TL->updateTailieu($matl,$file)){
+		if($data2=$TL->updateCapnhat($matl,$magv,$ngaycn,$noidung,$phucap,$vaitro,$kiemduyet)){
+			thong_bao_abc("Sửa thành công!!");
+		}else{?><script type="text/javascript">
+					alert("Chưa cập nhật được bảng Cập nhật");
+				</script><?php 
+		}
+	}else{?><script type="text/javascript">
+				alert("Chưa cập nhật được bảng Tài liệu");
+			</script><?php 
 	}
 ?>

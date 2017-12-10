@@ -41,9 +41,10 @@
 <div class="table-responsive" style="height:300px">
 	<table class="table" width="726" bordercolorlight="#000000" >
        <thead>
-        	<th width="340">Tên tài liệu</th>
-            <th width="116">Loại tài liệu</th>
-            <th width="248">Nhà xuất bản</th>
+        	<th width="330">Tên tài liệu</th>
+            <th width="106">Loại tài liệu</th>
+            <th width="238">Nhà xuất bản</th>
+            <th width="30"></th>
        </thead>
         <?php
 		//echo $sm;
@@ -52,11 +53,13 @@
 					$ten=$v['TenTaiLieu'];
 					$loai=$v['LoaiTaiLieu'];
 					$nxb= $v['NXB'] ;
+					$file=$v['file'];
 					?>
 					<tr>
 						<td> <?php echo "$ten" ?></td>
 						<td><?php echo "$loai" ?></td>
 						<td><?php echo "$nxb" ?></td>
+                        <td><a href="file/readfile.php?file=<?php echo $file ?>">Xem</a></td>
 					</tr>
 					<?php
 				   // print_r($v);

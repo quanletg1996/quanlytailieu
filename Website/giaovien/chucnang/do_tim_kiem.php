@@ -37,10 +37,11 @@
 	<table class="table" width="726" bordercolorlight="#000000" >
        <thead>
     	<tr>
-        	<th width="300">Tên tài liệu</th>
-            <th width="96">Loại tài liệu</th>
-            <th width="228">Nhà xuất bản</th>
-            <th width="60">Download</th>
+        	<th width="290">Tên tài liệu</th>
+            <th width="86">Loại tài liệu</th>
+            <th width="218">Nhà xuất bản</th>
+            <th width="30"></th>
+            <th width="60"></th>
         </tr>
        </thead>
         <?php
@@ -56,6 +57,7 @@
 						<td> <?php echo "$ten" ?></td>
 						<td><?php echo "$loai" ?></td>
 						<td><?php echo "$nxb" ?></td>
+                        <td><a href="../file/readfile.php?file=<?php echo $file ?>">Xem</a></td>
                         <td><a href="<?php echo "../file/$file" ?>">Download</a></td>
 					</tr>
 					<?php

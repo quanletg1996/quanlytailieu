@@ -55,9 +55,7 @@
     <form style="margin:10px auto;width:50%" name="form" action="../chucnang/them.php" method="post" enctype="multipart/form-data">
       <div class="form-group">
         <label for="inputlg" style="padding-left:15px">Loại tài liệu:</label>
-        <select name="loaitl" id="loaitl" >
-        	<option value="Bài giảng">Bài giảng</option>
-        </select>
+        <input name="loaitl" id="loaitl" value="Bài giảng" readonly>
       </div>
       <div class="form-group">
         <label for="inputsm" style="padding-left:15px">Tên tài liệu:</label>
@@ -106,13 +104,13 @@
         
       </div>
       <div style="margin-left:50px">
-       <label for="inputlg" style="padding-left:15px">Tiến độ</label>
-       <select name="tiendo" id="tiendo" >
+       <!--<label for="inputlg" style="padding-left:15px">Tiến độ</label>-->
+       <select name="tiendo" id="tiendo" hidden>
        		<option value="0%">0%</option>
         	<option value="25%">25%</option>
             <option value="50%" >50%</option>
             <option value="75%" >75%</option>
-            <option value="100%" >100%</option>
+            <option value="100%" selected="selected">100%</option>
         </select>
       </div>
       <div class="form-group">
@@ -128,9 +126,9 @@
         </select>
        </div>
        <div class="form-group"> 
-        <label for="inputlg" style="padding-left:15px">Vai trò</label>
-        <select name="vaitro" id="vaitro" >
-        	<option value="Soạn chính">Soạn chính</option>
+        <!--<label for="inputlg" style="padding-left:15px">Vai trò</label>-->
+        <select name="vaitro" id="vaitro" hidden="">
+        	<option value="Soạn chính" selected="selected">Soạn chính</option>
             <option value="Soạn phụ" >Soạn phụ</option>
         </select>
       </div>

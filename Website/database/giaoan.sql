@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 01, 2017 lúc 01:02 SA
+-- Thời gian đã tạo: Th12 10, 2017 lúc 06:53 CH
 -- Phiên bản máy phục vụ: 5.7.14
 -- Phiên bản PHP: 5.6.25
 
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `capnhat` (
   `ID` int(10) NOT NULL,
-  `TaiLieuMaTaiLieu` varchar(10) NOT NULL,
+  `TaiLieuMaTaiLieu` varchar(255) NOT NULL,
   `GiaoVienMaGiaoVien` int(10) NOT NULL,
   `NgayCapNhat` date DEFAULT NULL,
   `TomTatND` varchar(255) DEFAULT NULL,
@@ -81,7 +81,7 @@ CREATE TABLE `giaovien` (
 --
 
 INSERT INTO `giaovien` (`MaGiaoVien`, `TenGiaoVien`) VALUES
-(1, 'Nguễn Văn A'),
+(1, 'Nguyễn Văn A'),
 (2, 'Trần Thị B'),
 (3, 'Nguyễn Trần C'),
 (4, 'Lê Văn D'),
@@ -132,7 +132,7 @@ INSERT INTO `monhoc` (`MaMonHoc`, `TenMonHoc`) VALUES
 
 CREATE TABLE `soan` (
   `ID` int(10) NOT NULL,
-  `TaiLieuMaTaiLieu` varchar(10) NOT NULL,
+  `TaiLieuMaTaiLieu` varchar(255) NOT NULL,
   `GiaoVienMaGiaoVien` int(10) NOT NULL,
   `TienDo` varchar(255) DEFAULT NULL,
   `NgayBD` date DEFAULT NULL,
@@ -159,48 +159,51 @@ INSERT INTO `soan` (`ID`, `TaiLieuMaTaiLieu`, `GiaoVienMaGiaoVien`, `TienDo`, `N
 --
 
 CREATE TABLE `tailieu` (
-  `MaTaiLieu` varchar(10) NOT NULL,
+  `MaTaiLieu` varchar(255) NOT NULL,
   `MonHocMaMonHoc` int(10) NOT NULL,
   `TenTaiLieu` varchar(255) DEFAULT NULL,
   `ThongTin` varchar(255) DEFAULT NULL,
   `LoaiTaiLieu` varchar(255) DEFAULT NULL,
-  `NXB` varchar(255) DEFAULT NULL
+  `NXB` varchar(255) DEFAULT NULL,
+  `file` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Đang đổ dữ liệu cho bảng `tailieu`
 --
 
-INSERT INTO `tailieu` (`MaTaiLieu`, `MonHocMaMonHoc`, `TenTaiLieu`, `ThongTin`, `LoaiTaiLieu`, `NXB`) VALUES
-('BGCSDL', 5, 'Bài giảng cơ sở dữ liệu', 'Viết mới', 'Bài giảng', 'Không có'),
-('BGKTLT', 2, 'Bài giảng Kỹ thuật lập trình', 'Viết mới', 'Bài giảng', 'Không có'),
-('BGLTHDT', 3, 'Bài giảng lập trình hướng đối tượng', 'Viết mới', 'Bài giảng', 'Không có'),
-('BGLTMB', 8, 'Bài giảng lập trình mobile', 'Viết mới', 'Bài giảng', 'Không có'),
-('BGLTW', 10, 'Bài giảng lập trình window', 'Viết mới', 'Bài giảng', 'Không có'),
-('BGNMLT', 1, 'Bài giảng Nhập môn lập trình', 'Viết mới', 'Bài giảng', 'Không có'),
-('BGNMW', 6, 'Bài giảng nhập môn web', 'Viết mới', 'Bài giảng', 'Không có'),
-('BGPTTKHT', 9, 'Bài giảng phân tính thiết kế hệ thống', 'Viết mới', 'Bài giảng', 'Không có'),
-('BGTRR', 4, 'Bài giảng toán rời rạc', 'Viết mới', 'Bài giảng', 'Không có'),
-('BGUDW', 7, 'Bài giảng ứng dụng web', 'Viết mới', 'Bài giảng', 'Không có'),
-('GTLTCSDL', 5, 'Giáo trình lý thuyết cơ sở dữ liệu', 'Viết mới', 'Giáo trình', 'Trường Đại học Công nghệ Sài Gòn'),
-('GTLTKTLT', 2, 'Giáo trình lý thuyết Kỹ thuật lập trình', 'Cập nhật', 'Giáo trình', 'Trường đại học Công nghệ Sài Gòn'),
-('GTLTLTHDT', 3, 'Giáo trình lý thuyết lập trình hướng đối tượng', 'Viết mới', 'Giáo trình', 'Trường Đại học Công nghệ Sài Gòn'),
-('GTLTLTMB', 8, 'Giáo trình lý thuyết lập trình mobile', 'Viết mới ', 'Giáo trình', 'Trường Đại học Công nghệ Sài Gòn '),
-('GTLTLTW', 10, 'Giáo trình lý thuyết lập trình window', 'Viết mới', 'Giáo trình', 'Trường Đại học Công nghệ Sài Gòn'),
-('GTLTNMLT', 1, 'Giáo trình lý thuyết Nhập môn lập trình', 'viết mới', 'Giáo trình', 'Trường Đại học Công nghệ Sài Gòn'),
-('GTLTNMW', 6, 'Giáo trình lý thuyết nhập môn web', 'Viết mới', 'Giáo trình', 'Trường Đại học Công nghệ Sài Gòn'),
-('GTLTPTTKHT', 9, 'Giáo trình lý thuyết phân tích thiết kế hệ thống', 'Viết mới', 'Giáo trình', 'Trường Đại học Công Nghệ Sài Gòn'),
-('GTLTTRR', 4, 'Giáo trình lý thuyết toán rời rạc', 'Viết mới', 'Giáo trình', 'Trường Đại học Công nghệ Sài Gòn'),
-('GTLTUDW', 7, 'Giáo trình lý thuyết ứng dụng web', 'Viết mới', 'Giáo trình', 'Trường Đại học Công nghệ Sài Gòn'),
-('GTTHCSDL', 5, 'Giáo trình thực hành Cơ sở dữ liệu', 'Viết mới', 'Giáo trình', 'Trường Đại học Công nghệ Sài Gòn'),
-('GTTHKTLT', 2, 'Giáo trình Thực hành Kỹ thuật lập trình', 'Cập nhật', 'Giáo trình', 'Trường Đại học Công nghệ Sài Gòn'),
-('GTTHLTHDT', 3, 'Giáo trình thực hành lập trình hướng đối tượng', 'Viết mới', 'Giáo trình', 'Trường Đại học Công nghệ Sài Gòn'),
-('GTTHLTMB', 8, 'Giáo trình thực hành lập trình mobile', 'Viết mới', 'Giáo trình', 'Trường Đại học Công nghệ Sài Gòn '),
-('GTTHLTW', 10, 'Giáo trình thực hành window ', 'Viết mới', 'Giáo trình', 'Trường Đại học Công nghệ Sài Gòn'),
-('GTTHNMLT', 1, 'Giáo trình thực hành Nhập môn lập trình', 'Viết mới', 'Giáo trình', 'Trường Đại học Công nghệ Sài Gòn'),
-('GTTHNMW', 6, 'Giáo trình thực hành nhập môn web', 'Viết mới', 'Giáo trình', 'Trường Đại học Công nghệ Sài Gòn'),
-('GTTHTRR', 4, 'Giáo trình thực hành toán rời rạc', 'Viết mới', 'Giáo trình', 'Trường Đại học Công nghệ Sài Gòn'),
-('GTTHUDW', 7, 'Giáo trình thực hành ứng dụng web', 'Viết mới', 'Giáo trình', 'Trường Đại học Công Nghệ Sài Gòn');
+INSERT INTO `tailieu` (`MaTaiLieu`, `MonHocMaMonHoc`, `TenTaiLieu`, `ThongTin`, `LoaiTaiLieu`, `NXB`, `file`) VALUES
+('abc', 1, 'abc', 'Cập nhật', 'Bài giảng', 'Không có', 'file1512931326.docx'),
+('BGCSDL', 5, 'Bài giảng cơ sở dữ liệu', 'Cập nhật', 'Bài giảng', 'Không có', 'file1512931882.docx'),
+('BGKTLT', 2, 'Bài giảng Kỹ thuật lập trình', 'Cập nhật', 'Bài giảng', 'Không có', 'file1512927596.docx'),
+('BGLTHDT', 3, 'Bài giảng lập trình hướng đối tượng', 'Cập nhật', 'Bài giảng', 'Không có', ''),
+('BGLTMB', 8, 'Bài giảng lập trình mobile', 'Viết mới', 'Bài giảng', 'Không có', ''),
+('BGLTW', 10, 'Bài giảng lập trình window', 'Cập nhật', 'Bài giảng', 'Không có', 'file1512930779.docx'),
+('BGNMLT', 1, 'Bài giảng Nhập môn lập trình', 'Cập nhật', 'Bài giảng', 'Không có', 'file1512930594.docx'),
+('BGNMW', 6, 'Bài giảng nhập môn web', 'Cập nhật', 'Bài giảng', 'Không có', 'file1512931073.docx'),
+('BGPTTKHT', 9, 'Bài giảng phân tính thiết kế hệ thống', 'Viết mới', 'Bài giảng', 'Không có', ''),
+('BGTRR', 4, 'Bài giảng toán rời rạc', 'Viết mới', 'Bài giảng', 'Không có', ''),
+('BGUDW', 7, 'Bài giảng ứng dụng web', 'Viết mới', 'Bài giảng', 'Không có', ''),
+('GTLTCSDL', 5, 'Giáo trình lý thuyết cơ sở dữ liệu', 'Cập nhật', 'Giáo trình', 'Trường Đại học Công nghệ Sài Gòn', 'file1512930039.docx'),
+('GTLTKTLT', 2, 'Giáo trình lý thuyết Kỹ thuật lập trình', 'Cập nhật', 'Giáo trình', 'Trường đại học Công nghệ Sài Gòn', ''),
+('GTLTLTHDT', 3, 'Giáo trình lý thuyết lập trình hướng đối tượng', 'Viết mới', 'Giáo trình', 'Trường Đại học Công nghệ Sài Gòn', ''),
+('GTLTLTMB', 8, 'Giáo trình lý thuyết lập trình mobile', 'Viết mới ', 'Giáo trình', 'Trường Đại học Công nghệ Sài Gòn ', ''),
+('GTLTLTW', 10, 'Giáo trình lý thuyết lập trình window', 'Viết mới', 'Giáo trình', 'Trường Đại học Công nghệ Sài Gòn', ''),
+('GTLTNMLT', 1, 'Giáo trình lý thuyết Nhập môn lập trình', 'viết mới', 'Giáo trình', 'Trường Đại học Công nghệ Sài Gòn', ''),
+('GTLTNMW', 6, 'Giáo trình lý thuyết nhập môn web', 'Viết mới', 'Giáo trình', 'Trường Đại học Công nghệ Sài Gòn', ''),
+('GTLTPTTKHT', 9, 'Giáo trình lý thuyết phân tích thiết kế hệ thống', 'Viết mới', 'Giáo trình', 'Trường Đại học Công Nghệ Sài Gòn', ''),
+('GTLTTRR', 4, 'Giáo trình lý thuyết toán rời rạc', 'Viết mới', 'Giáo trình', 'Trường Đại học Công nghệ Sài Gòn', ''),
+('GTLTUDW', 7, 'Giáo trình lý thuyết ứng dụng web', 'Viết mới', 'Giáo trình', 'Trường Đại học Công nghệ Sài Gòn', ''),
+('GTTHCSDL', 5, 'Giáo trình thực hành Cơ sở dữ liệu', 'Viết mới', 'Giáo trình', 'Trường Đại học Công nghệ Sài Gòn', ''),
+('GTTHKTLT', 2, 'Giáo trình Thực hành Kỹ thuật lập trình', 'Cập nhật', 'Giáo trình', 'Trường Đại học Công nghệ Sài Gòn', ''),
+('GTTHLTHDT', 3, 'Giáo trình thực hành lập trình hướng đối tượng', 'Viết mới', 'Giáo trình', 'Trường Đại học Công nghệ Sài Gòn', ''),
+('GTTHLTMB', 8, 'Giáo trình thực hành lập trình mobile', 'Viết mới', 'Giáo trình', 'Trường Đại học Công nghệ Sài Gòn ', ''),
+('GTTHLTW', 10, 'Giáo trình thực hành window ', 'Viết mới', 'Giáo trình', 'Trường Đại học Công nghệ Sài Gòn', ''),
+('GTTHNMLT', 1, 'Giáo trình thực hành Nhập môn lập trình', 'Viết mới', 'Giáo trình', 'Trường Đại học Công nghệ Sài Gòn', ''),
+('GTTHNMW', 6, 'Giáo trình thực hành nhập môn web', 'Viết mới', 'Giáo trình', 'Trường Đại học Công nghệ Sài Gòn', ''),
+('GTTHTRR', 4, 'Giáo trình thực hành toán rời rạc', 'Viết mới', 'Giáo trình', 'Trường Đại học Công nghệ Sài Gòn', ''),
+('GTTHUDW', 7, 'Giáo trình thực hành ứng dụng web', 'Viết mới', 'Giáo trình', 'Trường Đại học Công Nghệ Sài Gòn', ''),
+('xxxx', 1, 'xxxxxx', 'Viết mới', 'Bài giảng', 'Không có', 'file1512802445.docx');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -213,6 +216,12 @@ ALTER TABLE `capnhat`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `FKCapNhat489858` (`GiaoVienMaGiaoVien`),
   ADD KEY `FKCapNhat764022` (`TaiLieuMaTaiLieu`);
+
+--
+-- Chỉ mục cho bảng `dangnhap`
+--
+ALTER TABLE `dangnhap`
+  ADD PRIMARY KEY (`taikhoan`);
 
 --
 -- Chỉ mục cho bảng `giaovien`
@@ -249,12 +258,22 @@ ALTER TABLE `tailieu`
 -- AUTO_INCREMENT cho bảng `capnhat`
 --
 ALTER TABLE `capnhat`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+--
+-- AUTO_INCREMENT cho bảng `giaovien`
+--
+ALTER TABLE `giaovien`
+  MODIFY `MaGiaoVien` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+--
+-- AUTO_INCREMENT cho bảng `monhoc`
+--
+ALTER TABLE `monhoc`
+  MODIFY `MaMonHoc` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT cho bảng `soan`
 --
 ALTER TABLE `soan`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- Các ràng buộc cho các bảng đã đổ
 --

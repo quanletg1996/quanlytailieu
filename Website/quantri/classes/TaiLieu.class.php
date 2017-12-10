@@ -46,20 +46,26 @@
 			if($data !=null){return $data;}
 			else{return false;}	
 		}
-		public function updateTailieu($ma){
-			$data=null;
-			$arr=array("$ma");
-			$data=$this->query("UPDATE tailieu SET ThongTin='Cập nhật' WHERE MaTaiLieu=?", $arr);
-			if($data !=null){return $data;}
-			else{return false;}
+		public function updateTailieu($ma,$file){
+			$arr=array("$file","$ma");
+			$data=$this->query("UPDATE tailieu SET ThongTin='Cập nhật', file=? WHERE MaTaiLieu=?", $arr);
+			$n=$this->numRow;
+			if($n!=0){return true;}
+			else {return false;}
 		}
 		public function updateCapnhat($matl,$magv,$ngaycn,$noidung,$phucap,$vaitro,$kiemduyet){
-			$data=null;
-			$arr= array("$matl","$magv","$ngaycn","$noidung","$phucap","$vaitro","$kiemduyet");
-			$data=$this->query("INSERT INTO capnhat (TaiLieuMaTaiLieu , GiaoVienMaGiaoVien , NgayCapNhat ,TomTatND ,PhuCap ,VaiTro ,NguoiKiemDuyet)
-									VALUES (?,?,?,?,?,?,?)", $arr);
-			if($data !=null){return $data;}
-			else{return false;}
+			$arr= array("$matl",$magv,"$ngaycn","$noidung","$vaitro","$kiemduyet");
+			if($phucap==0){
+				$data=$this->query("INSERT INTO capnhat (TaiLieuMaTaiLieu , GiaoVienMaGiaoVien , NgayCapNhat ,TomTatND ,PhuCap ,VaiTro ,NguoiKiemDuyet)
+									VALUES (?,?,?,?,0,?,?)", $arr);
+			}
+			else{
+				$data=$this->query("INSERT INTO capnhat (TaiLieuMaTaiLieu , GiaoVienMaGiaoVien , NgayCapNhat ,TomTatND ,PhuCap ,VaiTro ,NguoiKiemDuyet)
+									VALUES (?,?,?,?,1,?,?)", $arr);
+			}
+			$n=$this->numRow;
+			if($n!=0){return true;}
+			else {return false;}
 		}
 		public function insertTailieu($matl,$mamh,$tentl,$thongtin,$loaitl,$nxb,$file){
 			$data=null;
@@ -75,7 +81,7 @@
 									VALUES (?,?,?,?,?,?,?,?)", $arr);
 			return true;
 		}
-		public function upload($file,$path,$maxsize=1,$extention = array('docx','doc','pptx','ppsx'))
+		public function upload($file,$path,$maxsize=1,$extention = array('docx','doc','pptx','ppsx','bdf'))
 		{
 			$size = $maxsize * 1024*1024; 
 			//kiem tra dữ liệu post lên trong $_FILES ($file)
@@ -90,10 +96,10 @@
 					if(in_array($ext,$extention))
 					{
 						$newname = 'file'.time().'.'.$ext;
-						$fullpath = $newname;
+						$fullpath = $path.$newname;
 						if(move_uploaded_file($file['tmp_name'],$fullpath))
 						{
-							return $fullpath;
+							return $newname;
 						}
 						return false; 						
 					}

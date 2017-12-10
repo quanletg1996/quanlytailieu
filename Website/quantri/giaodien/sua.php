@@ -56,7 +56,7 @@
      
 <!--Khung sua --> 
 <div class="container">
-    <form style="margin:10px auto;width:50%" name="form" action="../chucnang/sua.php?matl=<?php echo $ma?>" method="post">
+    <form style="margin:10px auto;width:50%" name="form" action="../chucnang/sua.php?matl=<?php echo $ma?>" method="post" enctype="multipart/form-data">
       <div class="form-group">
         <label for="inputsm" style="padding-left:15px">Tên tài liệu:</label>
         <input class="form-control input-sm" value="<?php echo $tentl ?>" id="tentl" name="tentl" type="text">
@@ -69,7 +69,7 @@
 					$tengv=$v['TenGiaoVien'];
 					$magv=$v['MaGiaoVien'];
 					?>
-             <option value="<?php echo $magv ?>"><?php echo $tengv ?></option>       
+             <option value="<?php echo $magv ?>"> <?php echo $tengv ?> </option>       
           <?php } ?>
         </select>
 
@@ -80,17 +80,21 @@
       </div>
       <div class="form-group">
         <label for="inputlg" style="padding-left:15px">Tóm tắt nội dung sửa</label>
-        <textarea class="form-control" rows="5" id="comment" name="noidung" id="noidung" required>Tóm tắt nội dung sửa: </textarea>
+        <textarea class="form-control" rows="5" id="comment" name="noidung" id="noidung" placeholder="Tóm tắt nội dung sửa:" required> </textarea>
+      </div>
+      <div class="form-group">
+        <label for="inputdefault" style="padding-left:15px">File tài liệu đã sửa:</label>
+        <input id="file" name="file" type="file" required>
       </div>
       <div class="form-group">
         <label for="inputlg" style="padding-left:15px">Phụ cấp</label><br />
-        <input id="phucap"  name="phucap" type="radio" value="1" required>Đã nhận
+        <input id="phucap"  name="phucap" type="radio" value="1" >Đã nhận
         <input id="phucap" name="phucap" type="radio" value="0" >Chưa nhận<br />
       </div>
       <div class="form-group">
-        <label for="inputlg" style="padding-left:15px">Vai trò</label>
-        <select name="vaitro" id="vaitro" >
-        	<option value="Soạn chính">Soạn chính</option>
+        <!--<label for="inputlg" style="padding-left:15px">Vai trò</label>-->
+        <select name="vaitro" id="vaitro" hidden="">
+        	<option value="Soạn chính" selected="selected">Soạn chính</option>
             <option value="Soạn phụ" >Soạn phụ</option>
         </select>
       </div>
